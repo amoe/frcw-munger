@@ -18,14 +18,14 @@ INPUT = """<?xml version="1.0"?>
 </html>"""
 
 
-def get_content(tree) -> str:
+def get_basic_paragraph(tree) -> str:
     xhtml_ns = tree.nsmap.get(None)
     namespaces = {'x': xhtml_ns}
     p = tree.find('.//x:p', namespaces=namespaces)
     return ''.join(p.itertext())
 
     
-def test_sanity():
+def test_basic_paragraph():
     parser = lxml.etree.XMLParser()
     tree = lxml.etree.fromstring(INPUT, parser=parser)
-    assert get_content(tree) == 'The quick brown fox'
+    assert get_basic_paragraph(tree) == 'The quick brown fox'
